@@ -2030,7 +2030,7 @@ class LWPCookieTests(unittest.TestCase):
             f.write("# HTTP Cookie File\ninvalid_line\n")
         jar = MozillaCookieJar(filename)
         try:
-            with self.assertRaises(LoadError):
+            with self.assertRaisesRegex(LoadError, "invalid Netscape format cookies file"):
                 jar.load()
         finally:
             os_helper.unlink(filename)
